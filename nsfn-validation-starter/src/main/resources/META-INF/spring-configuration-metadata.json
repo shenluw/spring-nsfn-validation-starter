@@ -1,0 +1,26 @@
+{
+  "groups": [
+    {
+      "name": "nsfn",
+      "type": "top.shenluw.nsfn.validation.NsfnProperties",
+      "sourceType": "top.shenluw.nsfn.validation.NsfnProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "nsfn.words",
+      "type": "java.util.Set<java.lang.String>",
+      "sourceType": "top.shenluw.nsfn.validation.NsfnProperties"
+    },
+    {
+      "name": "nsfn.word-dir",
+      "type": "java.lang.String",
+      "sourceType": "top.shenluw.nsfn.validation.NsfnProperties"
+    },
+    {
+      "name": "nsfn.word-file",
+      "type": "java.io.File",
+      "sourceType": "top.shenluw.nsfn.validation.NsfnProperties"
+    }
+  ]
+}

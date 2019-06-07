@@ -1,0 +1,5 @@
+apply plugin: 'kotlin'
+
+dependencies {
+	compile 'org.ahocorasick:ahocorasick:0.+'
+}

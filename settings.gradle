@@ -1,0 +1,4 @@
+rootProject.name = 'nsfn'
+
+include "sensitivewords"
+include "nsfn-validation-starter"
