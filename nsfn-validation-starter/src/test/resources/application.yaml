@@ -1,0 +1,10 @@
+logging:
+  group:
+    shenluw: top.shenluw
+  level:
+    shenluw: debug
+  pattern:
+    console: -%clr(%d{${LOG_DATEFORMAT_PATTERN:dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%5.15t]){faint} %clr(%-40.40logger{39}){cyan} %line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}
+
+nsfn:
+  words: 敏感词,敏感
