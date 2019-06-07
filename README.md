@@ -1,6 +1,6 @@
 # spring-nsfn-validation-starter
 
-Spring实现请求参数敏感词校验,使用类Aho–Corasick作为检测算法
+Spring实现请求参数敏感词校验,使用Aho–Corasick作为检测算法
 项目采用Kotlin实现
 
 ### 外部依赖库: 
