@@ -1,5 +1,6 @@
 package top.shenluw.nsfn.validation
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
@@ -17,7 +18,7 @@ import java.util.function.Consumer
 @Configuration
 @EnableConfigurationProperties(NsfnProperties::class)
 class NsfnAutoConfiguration {
-
+	@Autowired
 	private lateinit var properties: NsfnProperties
 
 	@Bean(SENSITIZE_PROCESSOR_BEAN_NAME)
