@@ -6,7 +6,7 @@ package top.shenluw.nsfn.sensitivewords
  * @author Shenluw
  * 创建日期：2019/6/6 17:16
  */
-abstract class SensitizeProcessor(words: Set<String>) {
+abstract class SensitizeProcessor(words: Set<String>, val factory: DesensitizeStrategyFactory) {
 	/* 敏感词替换字符 */
 	var escape: String = "*"
 

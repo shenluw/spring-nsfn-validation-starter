@@ -1,27 +1,23 @@
 package top.shenluw.nsfn.sensitivewords.ahocorasick
 
 import org.ahocorasick.trie.Trie
+import top.shenluw.nsfn.sensitivewords.DesensitizeStrategyFactory
 import top.shenluw.nsfn.sensitivewords.SensitizeProcessor
 
 /**
  * @author Shenluw
  * 创建日期：2019/6/6 17:24
  */
-class AhocorasickSensitizeProcessor(words: Set<String>) : SensitizeProcessor(words) {
+class AhocorasickSensitizeProcessor(words: Set<String>, factory: DesensitizeStrategyFactory)
+	: SensitizeProcessor(words, factory) {
 	private var trie: Trie? = null
 
 	override fun desensitize(text: CharSequence): CharSequence? {
-		val sb = StringBuilder(text)
-		var offset = 0
-		var len: Int
-		val escapeLen = this.escape.length
-
+		val strategy = factory.create(text, this.escape)
 		trie?.parseText(text)?.forEach {
-			len = it.end - it.start + 1
-			sb.replace(it.start - offset, it.end + 1 - offset, this.escape)
-			offset += len - escapeLen
+			strategy.desensitize(it.start, it.end, it.keyword)
 		}
-		return sb.toString()
+		return strategy.getResult()
 	}
 
 	override fun containsMatch(text: CharSequence): Boolean {

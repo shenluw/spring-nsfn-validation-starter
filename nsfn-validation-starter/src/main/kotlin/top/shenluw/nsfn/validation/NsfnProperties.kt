@@ -15,4 +15,6 @@ class NsfnProperties {
 	var wordFile: File? = null
 	// 敏感词
 	var words: MutableSet<String>? = null
+	// 敏感词替换字符串
+	var escape: String? = null
 }

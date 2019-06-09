@@ -4,11 +4,8 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
-import top.shenluw.nsfn.sensitivewords.NsfnException
-import top.shenluw.nsfn.sensitivewords.SensitizeProcessor
-import top.shenluw.nsfn.sensitivewords.WordStore
-import top.shenluw.nsfn.sensitivewords.ahocorasick.AhocorasickSensitizeProcessor
-import top.shenluw.nsfn.sensitivewords.load
+import top.shenluw.nsfn.sensitivewords.*
+import top.shenluw.nsfn.sensitivewords.ahocorasick.AhoCorasickDoubleArrayTrieSensitizeProcessor
 import top.shenluw.nsfn.sensitivewords.store.MemoryWordStore
 import java.io.File
 import java.util.function.Consumer
@@ -21,11 +18,22 @@ import java.util.function.Consumer
 @EnableConfigurationProperties(NsfnProperties::class)
 class NsfnAutoConfiguration {
 
+	private lateinit var properties: NsfnProperties
+
 	@Bean(SENSITIZE_PROCESSOR_BEAN_NAME)
-	fun sensitizeProcessorBean(wordStore: WordStore): SensitizeProcessor {
-		val processor = AhocorasickSensitizeProcessor(wordStore.get())
+	fun sensitizeProcessorBean(wordStore: WordStore, factory: DesensitizeStrategyFactory): SensitizeProcessor {
+		val processor = AhoCorasickDoubleArrayTrieSensitizeProcessor(wordStore.get(), factory)
+		if (properties.escape != null) {
+			processor.escape = properties.escape!!
+		}
 		wordStore.addListener(Consumer { processor.updateWords(it.get()) })
 		return processor
+	}
+
+	@Bean
+	@ConditionalOnMissingBean
+	fun desensitizeStrategyFactory(): DesensitizeStrategyFactory {
+		return DefaultDesensitizeStrategyFactory()
 	}
 
 	@Bean
